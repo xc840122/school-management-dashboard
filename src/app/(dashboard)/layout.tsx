@@ -7,6 +7,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // left right structure
     <div className="flex h-screen">
       {/* Left */}
       <div className="w-[14%] md:w-[8%] lg:w-[16%] xl:w-[14%] p-4">
