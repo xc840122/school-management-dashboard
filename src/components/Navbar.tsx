@@ -17,7 +17,7 @@ const Navbar = async () => {
           placeholder="Search..." />
       </div>
       {/* Icons and User */}
-      <div className="flex items-center justify-end w-full space-x-6">
+      <div className="flex items-center justify-end flex-1 space-x-6">
         <div className="flex justify-center items-center 
         rounded-full w-7 h-7 cursor-pointer bg-white">
           <Image
