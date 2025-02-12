@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { role } from "../../public/data/data";
 
 const Menu = async () => {
 
@@ -144,22 +145,24 @@ const Menu = async () => {
           <div className="flex flex-col gap-2" key={menu.title}>
             <h1 className="hidden lg:block text-gray-400 font-light my-4">{menu.title}</h1>
             <ul className="flex flex-col gap-4">
-              {menu.items.map(item => (
-                <li className="py-2" key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="flex items-center justify-center lg:justify-start 
+              {menu.items.map(item =>
+                item.visible.includes(role) ? (
+                  <li className="py-2 md:px-2 hover:bg-CSky" key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="flex items-center justify-center lg:justify-start 
                     text-gray-500 space-x-4">
-                    <Image
-                      src={`/images${item.icon}`}
-                      alt={item.label}
-                      width={20}
-                      height={20}
-                    />
-                    <span className="hidden lg:block">{item.label}</span>
-                  </Link>
-                </li>
-              ))}
+                      <Image
+                        src={`/images${item.icon}`}
+                        alt={item.label}
+                        width={20}
+                        height={20}
+                      />
+                      <span className="hidden lg:block">{item.label}</span>
+                    </Link>
+                  </li>
+                ) : null
+              )}
             </ul>
           </div>
         ))}
