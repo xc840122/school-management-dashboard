@@ -137,7 +137,7 @@ const Menu = async () => {
           width={32}
           height={32}
         />
-        <span className='hidden lg:block'>School Management</span>
+        <span className='hidden lg:block font-bold'>School Management</span>
       </Link>
       <div className="mt-4 text-sm">
         {menuItems.map(menu => (

@@ -12,7 +12,7 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         CSky: "#C3EBFA",
-        CSkyLight: "EDF9FD",
+        CSkyLight: "#EDF9FD",
         CPurple: "#CFCEFF",
         CPurpleLight: "#F1F0FF",
         CYellow: "#FAE27C",
