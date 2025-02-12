@@ -1,4 +1,6 @@
+import AttendanceChart from "@/components/AttendanceChart"
 import CountChart from "@/components/CountChart"
+import FinanceChart from "@/components/FinanceChart"
 import UserCard from "@/components/UserCard"
 
 const AdminPage = async () => {
@@ -21,11 +23,13 @@ const AdminPage = async () => {
           </div>
           {/* Attendence chart */}
           <div className="w-full lg:w-2/3 h-[450px] rounded-2xl">
-
+            <AttendanceChart />
           </div>
         </div>
         {/* Bottom chart */}
-        <div></div>
+        <div className="h-[500px] w-full">
+          <FinanceChart />
+        </div>
       </div>
       {/* Right */}
       <div className="w-full lg:w-1/3"></div>
