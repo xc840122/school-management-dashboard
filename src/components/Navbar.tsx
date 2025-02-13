@@ -1,21 +1,10 @@
 import Image from "next/image"
+import SearchBar from "./SearchBar"
 
 const Navbar = async () => {
   return (
     <nav className="flex items-center justify-between p-4">
-      {/* Search Bar ，ring doesn't have height weight, border has*/}
-      <div className="hidden md:flex items-center space-x-2 text-xs rounded-full ring-[1.5px] ring-gray-300">
-        <Image
-          src="/images/search.png"
-          alt="Search"
-          width={14}
-          height={14}
-        />
-        <input
-          className="bg-transparent focus:outline-none w-52"
-          type="text"
-          placeholder="Search..." />
-      </div>
+      <SearchBar />
       {/* Icons and User */}
       <div className="flex items-center justify-end flex-1 space-x-6">
         <div className="flex justify-center items-center 
