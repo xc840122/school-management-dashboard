@@ -48,7 +48,7 @@ const columns = [
   },
 ];
 
-const StudentList = async () => {
+const StudentListPage = async () => {
   // function to render the row
   const renderRow = (item: Student) => (
     <tr
@@ -76,7 +76,7 @@ const StudentList = async () => {
         <div className="flex items-center gap-2">
           <Link href={"/list/teachers/${teacher.id}"}>
             <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
-              <Image src={"/images/view.png"} alt="View" width={16} height={16} />
+              <Image src={"/images/edit.png"} alt="Edit" width={16} height={16} />
             </button>
           </Link>
           {role === "admin" ? (
@@ -118,4 +118,4 @@ const StudentList = async () => {
   )
 }
 
-export default StudentList
+export default StudentListPage

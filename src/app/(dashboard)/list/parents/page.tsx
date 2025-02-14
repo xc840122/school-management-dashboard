@@ -20,7 +20,7 @@ const columns = [
     accessor: "info",
   },
   {
-    header: "Students",
+    header: "Student Name",
     accessor: "students",
     className: "hidden md:table-cell",
   },
@@ -40,7 +40,7 @@ const columns = [
   },
 ];
 
-const ParentList = async () => {
+const ParentListPage = async () => {
   // function to render the row
   const renderRow = (item: Parent) => (
     <tr
@@ -60,7 +60,7 @@ const ParentList = async () => {
         <div className="flex items-center gap-2">
           <Link href={"/list/teachers/${teacher.id}"}>
             <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
-              <Image src={"/images/view.png"} alt="View" width={16} height={16} />
+              <Image src={"/images/edit.png"} alt="Edit" width={16} height={16} />
             </button>
           </Link>
           {role === "admin" ? (
@@ -78,7 +78,7 @@ const ParentList = async () => {
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
       {/* Top */}
       <div className="flex justify-between items-center">
-        <h1 className="hidden md:block text-lg font-semibold">All Students</h1>
+        <h1 className="hidden md:block text-lg font-semibold">All Parents</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearchBar />
           <div className="flex items-center gap-4">
@@ -102,4 +102,4 @@ const ParentList = async () => {
   )
 }
 
-export default ParentList
+export default ParentListPage
