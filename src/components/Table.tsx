@@ -1,15 +1,11 @@
-import type { Teacher } from "@/app/(dashboard)/list/teachers/page";
-
-type ItemType = Teacher;
-
-const Table = async ({ columns, renderRow, data }: {
+const Table = async <T,>({ columns, renderRow, data }: {
   columns: {
     header: string;
     accessor: string;
     className?: string;
   }[];
-  renderRow: (item: ItemType) => React.ReactNode;
-  data: ItemType[];
+  renderRow: (item: T) => React.ReactNode;
+  data: T[];
 }) => {
   return (
     <table className="w-full mt-4">
