@@ -56,8 +56,11 @@ const columns = [
 const TeacherList = async () => {
   // function to render the row
   const renderRow = (teacher: Teacher) => (
-    <tr key={teacher.id} className="text-gray-500 text-sm">
-      <td>
+    <tr
+      key={teacher.id}
+      className="border-b border-gray-200 bg-slate-50 hover:bg-CPurpleLight"
+    >
+      <td className="flex item-center gap-4 p-4">
         <Image
           src={teacher.photo}
           alt="photo"
@@ -65,26 +68,29 @@ const TeacherList = async () => {
           height={40}
           className="md:hidden xl:block w-10 h-10 rounded-full object-cover"
         />
+        <div>
+          <h3 className="font-semibold">{teacher.teacherId}</h3>
+          <p className="text-xs text-gray-500">{teacher.email}</p>
+        </div>
       </td>
-      <td className="flex flex-col">
-        <h3 className="font-semibold">{teacher.teacherId}</h3>
-        <p className="text-xs text-gray-500">{teacher.email}</p>
-      </td>
+      <td className="hidden md:table-cell">{teacher.teacherId}</td>
       <td className="hidden md:table-cell">{teacher.subjects.join(',')}</td>
       <td className="hidden md:table-cell">{teacher.classes.join(',')}</td>
       <td className="hidden md:table-cell">{teacher.phone}</td>
       <td className="hidden md:table-cell">{teacher.address}</td>
-      <td className="flex items-center gap-2">
-        <Link href={"/list/teachers/${teacher.id}"}>
-          <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
-            <Image src={"/images/view.png"} alt="View" width={16} height={16} />
-          </button>
-        </Link>
-        {role === "admin" ? (
-          <button className="flex items-center justify-center rounded-full bg-CPurple w-7 h-7">
-            <Image src={"/images/delete.png"} alt="Delete" width={16} height={16} />
-          </button>) : null
-        }
+      <td>
+        <div className="flex items-center gap-2">
+          <Link href={"/list/teachers/${teacher.id}"}>
+            <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
+              <Image src={"/images/view.png"} alt="View" width={16} height={16} />
+            </button>
+          </Link>
+          {role === "admin" ? (
+            <button className="flex items-center justify-center rounded-full bg-CPurple w-7 h-7">
+              <Image src={"/images/delete.png"} alt="Delete" width={16} height={16} />
+            </button>) : null
+          }
+        </div>
       </td>
     </tr>
   )
