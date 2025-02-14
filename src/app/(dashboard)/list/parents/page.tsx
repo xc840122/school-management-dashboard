@@ -3,17 +3,14 @@ import Table from "@/components/Table"
 import TableSearchBar from "@/components/TableSearchBar"
 import Image from "next/image"
 import Link from "next/link";
-import { role, teachersData } from "../../../../../public/data/data";
+import { parentsData, role } from "../../../../../public/data/data";
 
-export type Teacher = {
+export type Parent = {
   id: number,
-  teacherId: string,
   name: string,
+  students: string[],
   email?: string,
-  photo: string,
   phone: string,
-  subjects: string[],
-  classes: string[],
   address: string,
 };
 
@@ -23,18 +20,8 @@ const columns = [
     accessor: "info",
   },
   {
-    header: "Teacher ID",
-    accessor: "teacherId",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Subjects",
-    accessor: "subjects",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Classes",
-    accessor: "classes",
+    header: "Students",
+    accessor: "students",
     className: "hidden md:table-cell",
   },
   {
@@ -53,29 +40,20 @@ const columns = [
   },
 ];
 
-const TeacherList = async () => {
+const ParentList = async () => {
   // function to render the row
-  const renderRow = (item: Teacher) => (
+  const renderRow = (item: Parent) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 bg-slate-50 hover:bg-CPurpleLight"
     >
       <td className="flex item-center gap-4 p-4">
-        <Image
-          src={item.photo}
-          alt="photo"
-          width={40}
-          height={40}
-          className="md:hidden xl:block w-10 h-10 rounded-full object-cover"
-        />
         <div>
           <h3 className="font-semibold">{item.name}</h3>
           <p className="text-xs text-gray-500">{item.email}</p>
         </div>
       </td>
-      <td className="hidden md:table-cell">{item.teacherId}</td>
-      <td className="hidden md:table-cell">{item.subjects.join(',')}</td>
-      <td className="hidden md:table-cell">{item.classes.join(',')}</td>
+      <td className="hidden md:table-cell">{item.students.join(",")}</td>
       <td className="hidden md:table-cell">{item.phone}</td>
       <td className="hidden md:table-cell">{item.address}</td>
       <td>
@@ -100,7 +78,7 @@ const TeacherList = async () => {
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
       {/* Top */}
       <div className="flex justify-between items-center">
-        <h1 className="hidden md:block text-lg font-semibold">All Teachers</h1>
+        <h1 className="hidden md:block text-lg font-semibold">All Students</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearchBar />
           <div className="flex items-center gap-4">
@@ -117,11 +95,11 @@ const TeacherList = async () => {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={teachersData} />
+      <Table columns={columns} renderRow={renderRow} data={parentsData} />
       {/* Pagination */}
       <Pagination />
     </div>
   )
 }
 
-export default TeacherList
+export default ParentList

@@ -3,17 +3,17 @@ import Table from "@/components/Table"
 import TableSearchBar from "@/components/TableSearchBar"
 import Image from "next/image"
 import Link from "next/link";
-import { role, teachersData } from "../../../../../public/data/data";
+import { role, studentsData } from "../../../../../public/data/data";
 
-export type Teacher = {
+export type Student = {
   id: number,
-  teacherId: string,
+  studentId: string,
   name: string,
   email?: string,
   photo: string,
-  phone: string,
-  subjects: string[],
-  classes: string[],
+  phone?: string,
+  grade: number,
+  class: string;
   address: string,
 };
 
@@ -23,18 +23,13 @@ const columns = [
     accessor: "info",
   },
   {
-    header: "Teacher ID",
-    accessor: "teacherId",
+    header: "Student ID",
+    accessor: "studentId",
     className: "hidden md:table-cell",
   },
   {
-    header: "Subjects",
-    accessor: "subjects",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Classes",
-    accessor: "classes",
+    header: "Grade",
+    accessor: "grade",
     className: "hidden md:table-cell",
   },
   {
@@ -53,9 +48,9 @@ const columns = [
   },
 ];
 
-const TeacherList = async () => {
+const StudentList = async () => {
   // function to render the row
-  const renderRow = (item: Teacher) => (
+  const renderRow = (item: Student) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 bg-slate-50 hover:bg-CPurpleLight"
@@ -73,9 +68,8 @@ const TeacherList = async () => {
           <p className="text-xs text-gray-500">{item.email}</p>
         </div>
       </td>
-      <td className="hidden md:table-cell">{item.teacherId}</td>
-      <td className="hidden md:table-cell">{item.subjects.join(',')}</td>
-      <td className="hidden md:table-cell">{item.classes.join(',')}</td>
+      <td className="hidden md:table-cell">{item.studentId}</td>
+      <td className="hidden md:table-cell">{item.grade}</td>
       <td className="hidden md:table-cell">{item.phone}</td>
       <td className="hidden md:table-cell">{item.address}</td>
       <td>
@@ -100,7 +94,7 @@ const TeacherList = async () => {
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
       {/* Top */}
       <div className="flex justify-between items-center">
-        <h1 className="hidden md:block text-lg font-semibold">All Teachers</h1>
+        <h1 className="hidden md:block text-lg font-semibold">All Students</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearchBar />
           <div className="flex items-center gap-4">
@@ -117,11 +111,11 @@ const TeacherList = async () => {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={teachersData} />
+      <Table columns={columns} renderRow={renderRow} data={studentsData} />
       {/* Pagination */}
       <Pagination />
     </div>
   )
 }
 
-export default TeacherList
+export default StudentList
