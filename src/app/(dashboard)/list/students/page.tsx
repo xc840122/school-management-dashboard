@@ -4,6 +4,7 @@ import TableSearchBar from "@/components/TableSearchBar"
 import Image from "next/image"
 import Link from "next/link";
 import { role, studentsData } from "../../../../../public/data/data";
+import FormModal from "@/components/FormModal";
 
 export type Student = {
   id: number,
@@ -76,13 +77,12 @@ const StudentListPage = async () => {
         <div className="flex items-center gap-2">
           <Link href={"/list/teachers/${teacher.id}"}>
             <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
-              <Image src={"/images/edit.png"} alt="Edit" width={16} height={16} />
+              <Image src={"/images/view.png"} alt="View" width={16} height={16} />
             </button>
           </Link>
-          {role === "admin" ? (
-            <button className="flex items-center justify-center rounded-full bg-CPurple w-7 h-7">
-              <Image src={"/images/delete.png"} alt="Delete" width={16} height={16} />
-            </button>) : null
+          {role === "admin"
+            ? <FormModal table="student" type="delete" id={item.id} />
+            : null
           }
         </div>
       </td>
@@ -104,9 +104,10 @@ const StudentListPage = async () => {
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
               <Image src="/images/sort.png" width={14} height={14} alt="filter" />
             </button>
-            <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/plus.png" width={14} height={14} alt="filter" />
-            </button>
+            {role === "admin"
+              ? <FormModal table="student" type="create" />
+              : null
+            }
           </div>
         </div>
       </div>

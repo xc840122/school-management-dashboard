@@ -2,8 +2,8 @@ import Pagination from "@/components/Pagination"
 import Table from "@/components/Table"
 import TableSearchBar from "@/components/TableSearchBar"
 import Image from "next/image"
-import Link from "next/link";
 import { classesData, role } from "../../../../../public/data/data";
+import FormModal from "@/components/FormModal";
 
 export type Class = {
   id: number,
@@ -52,27 +52,25 @@ const ClassListPage = async () => {
       <td className="hidden md:table-cell">{item.supervisor}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={"/list/teachers/${teacher.id}"}>
-            <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
-              <Image src={"/images/edit.png"} alt="Edit" width={16} height={16} />
-            </button>
-          </Link>
-          {role === "admin" ? (
-            <button className="flex items-center justify-center rounded-full bg-CPurple w-7 h-7">
-              <Image src={"/images/delete.png"} alt="Delete" width={16} height={16} />
-            </button>) : null
+          {role ===
+            "admin"
+            ?
+            <>
+              <FormModal table="class" type="update" data={item} />
+              <FormModal table="class" type="delete" id={item.id} />
+            </>
+            : null
           }
         </div>
       </td>
     </tr>
   )
 
-
   return (
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
       {/* Top */}
       <div className="flex justify-between items-center">
-        <h1 className="hidden md:block text-lg font-semibold">All Subjects</h1>
+        <h1 className="hidden md:block text-lg font-semibold">All Classes</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearchBar />
           <div className="flex items-center gap-4">
@@ -82,9 +80,10 @@ const ClassListPage = async () => {
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
               <Image src="/images/sort.png" width={14} height={14} alt="filter" />
             </button>
-            <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/plus.png" width={14} height={14} alt="filter" />
-            </button>
+            {role === "admin"
+              ? <FormModal table="class" type="create" />
+              : null
+            }
           </div>
         </div>
       </div>
