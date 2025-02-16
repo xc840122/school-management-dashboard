@@ -1,6 +1,7 @@
 'use client'
 import Image from "next/image";
-import { use, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import TeacherForm from "./forms/TeacherForm";
 
 const FormModal = <T,>({ table, type, data, id }: {
   table:
@@ -20,6 +21,7 @@ const FormModal = <T,>({ table, type, data, id }: {
   data?: T,
   id?: number,
 }) => {
+
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
   const bgColor = type === "create"
     ? "bg-CYellow"
@@ -32,14 +34,14 @@ const FormModal = <T,>({ table, type, data, id }: {
     if (open) {
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
-          console.log(e.key);
+          // console.log(e.key);
           setOpen(false)
         };
       };
-      console.log("AddEventListener");
+      // console.log("AddEventListener");
       document.addEventListener("keydown", handleKeyDown);
       return () => {
-        console.log("removeEventListener");
+        // console.log("removeEventListener");
         document.removeEventListener("keydown", handleKeyDown);
       };
     }
@@ -47,13 +49,12 @@ const FormModal = <T,>({ table, type, data, id }: {
 
 
   const Form = () => {
-    return type === "delete"
-      && (id
-        ? <form action="" className="flex flex-col gap-4 p-4">
-          <span className="text-center font-medium">All data will be lost. Are you sure to delete this {table}?</span>
-          <button className="bg-red-700 text-white py-2 rounded-md border-none">Delete</button>
-        </form>
-        : "create or update form")
+    return (type === "delete") && id
+      ? <form action="" className="flex flex-col gap-4 p-4 justify-center items-center">
+        <span className="text-center font-medium">All data will be lost. Are you sure to delete this {table}?</span>
+        <button className="bg-red-700 text-white py-2 px-4 rounded-md border-none w-max">Delete</button>
+      </form>
+      : <TeacherForm type="create" />
   }
 
   return (
