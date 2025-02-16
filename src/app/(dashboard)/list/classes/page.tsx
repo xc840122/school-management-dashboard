@@ -2,37 +2,36 @@ import Pagination from "@/components/Pagination"
 import Table from "@/components/Table"
 import TableSearchBar from "@/components/TableSearchBar"
 import Image from "next/image"
-import { parentsData, role } from "../../../../../public/data/data";
+import { classesData, role } from "../../../../../public/data/data";
 import FormModal from "@/components/FormModal";
 
-export type Parent = {
+export type Class = {
   id: number,
   name: string,
-  students: string[],
-  email?: string,
-  phone: string,
-  address: string,
+  capacity: number,
+  grade: number,
+  supervisor: string,
 };
 
 const columns = [
   {
-    header: "Info",
-    accessor: "info",
+    header: "Class Name",
+    accessor: "name",
   },
   {
-    header: "Student Name",
-    accessor: "students",
+    header: "Capacity",
+    accessor: "capacity",
     className: "hidden md:table-cell",
   },
   {
-    header: "Phone",
-    accessor: "phone",
-    className: "hidden lg:table-cell",
+    header: "Grade",
+    accessor: "grade",
+    className: "hidden md:table-cell",
   },
   {
-    header: "Address",
-    accessor: "address",
-    className: "hidden lg:table-cell",
+    header: "Supervisor",
+    accessor: "supervisor",
+    className: "hidden md:table-cell",
   },
   {
     header: "Actions",
@@ -40,30 +39,25 @@ const columns = [
   },
 ];
 
-const ParentListPage = async () => {
+const ClassListPage = async () => {
   // function to render the row
-  const renderRow = (item: Parent) => (
+  const renderRow = (item: Class) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 bg-slate-50 hover:bg-CPurpleLight"
     >
-      <td className="flex item-center gap-4 p-4">
-        <div>
-          <h3 className="font-semibold">{item.name}</h3>
-          <p className="text-xs text-gray-500">{item.email}</p>
-        </div>
-      </td>
-      <td className="hidden md:table-cell">{item.students.join(",")}</td>
-      <td className="hidden md:table-cell">{item.phone}</td>
-      <td className="hidden md:table-cell">{item.address}</td>
+      <td className="p-4">{item.name}</td>
+      <td className="hidden md:table-cell">{item.capacity}</td>
+      <td className="hidden md:table-cell">{item.grade}</td>
+      <td className="hidden md:table-cell">{item.supervisor}</td>
       <td>
         <div className="flex items-center gap-2">
           {role ===
             "admin"
             ?
             <>
-              <FormModal table="parent" type="update" data={item} />
-              <FormModal table="parent" type="delete" id={item.id} />
+              <FormModal table="class" type="update" data={item} />
+              <FormModal table="class" type="delete" id={item.id} />
             </>
             : null
           }
@@ -72,12 +66,11 @@ const ParentListPage = async () => {
     </tr>
   )
 
-
   return (
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
       {/* Top */}
       <div className="flex justify-between items-center">
-        <h1 className="hidden md:block text-lg font-semibold">All Parents</h1>
+        <h1 className="hidden md:block text-lg font-semibold">All Classes</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearchBar />
           <div className="flex items-center gap-4">
@@ -88,18 +81,18 @@ const ParentListPage = async () => {
               <Image src="/images/sort.png" width={14} height={14} alt="filter" />
             </button>
             {role === "admin"
-              ? <FormModal table="parent" type="create" />
+              ? <FormModal table="class" type="create" />
               : null
             }
           </div>
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={parentsData} />
+      <Table columns={columns} renderRow={renderRow} data={classesData} />
       {/* Pagination */}
       <Pagination />
     </div>
   )
 }
 
-export default ParentListPage
+export default ClassListPage
