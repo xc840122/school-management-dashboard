@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod"
 import InputField from "../InputField";
+import Image from "next/image";
 
 const schema = z.object({
   username: z
@@ -45,10 +46,10 @@ const TeacherForm = (
   });
 
   return (
-    <form className="flex flex-col items-center gap-8 p-4" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-8 p-4" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">Create a new teacher</h1>
       <span className="text-xs text-gray-400 font-medium">Authentication Information</span>
-      <div className="grid grid-cols-3 gap-8 w-full">
+      <div className="flex flex-wrap justify-between gap-8">
         {/* Username */}
         <InputField
           label="Username"
@@ -81,7 +82,7 @@ const TeacherForm = (
       <span className="text-xs text-gray-400 font-medium">
         Personal Information
       </span>
-      <div className="grid grid-cols-3 gap-8 w-full">
+      <div className="flex justify-between flex-wrap gap-8 items-center">
         {/* First Name */}
         <InputField
           label="First Name"
@@ -115,7 +116,7 @@ const TeacherForm = (
           register={register}
           error={errors?.address} />
         {/* Blood Type */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500 ">Blood Type</label>
           <select
             className="ring-[1.5px] ring-gray-300 rounded-md p-2 text-sm"
@@ -137,7 +138,7 @@ const TeacherForm = (
           error={errors?.birthday}
           type="date" />
         {/* Gender */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500 ">Gender</label>
           <select
             className="ring-[1.5px] ring-gray-300 rounded-md p-2 text-sm"
@@ -148,11 +149,18 @@ const TeacherForm = (
           </select>
         </div>
         {/* Upload a avatar image */}
-        <div className="flex flex-col gap-2">
-          <label className="text-xs text-gray-500 ">Avatar</label>
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label
+            className="flex justify-between text-xs text-gray-500 cursor-pointer"
+            htmlFor="avatar"
+          >
+            <Image src={"/images/upload.png"} alt="Upload" width={20} height={20} />
+            <span>Upload a avatar image</span>
+          </label>
           <input
-            className="ring-[1.5px] ring-gray-300 rounded-md p-2 text-sm"
+            className="ring-[1.5px] ring-gray-300 rounded-md p-2 text-sm hidden"
             type="file"
+            id="avatar"
             {...register("avatar")} />
           {errors.avatar?.message && <span className="text-red-500 text-xs">{errors.avatar.message.toString()}</span>}
         </div>
@@ -160,7 +168,7 @@ const TeacherForm = (
       <button className="bg-blue-400 text-white p-2">
         {type === "create" ? "Create" : "Update"}
       </button>
-    </form>
+    </form >
   )
 }
 

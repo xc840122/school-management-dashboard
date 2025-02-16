@@ -24,7 +24,7 @@ const InputField = (
     InputProps,
   }: InputTypeProps) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full md:w-1/4">
       <label className="text-xs text-gray-500 ">{label}</label>
       <input
         className="ring-[1.5px] ring-gray-300 rounded-md p-2 text-sm"
