@@ -28,21 +28,21 @@ const schema = z.object({
   ])
 });
 
-export type TeacherFormValues = z.infer<typeof schema>;
+export type StudentFormValues = z.infer<typeof schema>;
 
-const TeacherForm = ({
+const StudentForm = ({
   type,
   data,
 }: {
   type: "create" | "update",
-  data?: TeacherFormValues,
+  data?: StudentFormValues,
 }) => {
 
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<TeacherFormValues>({
+  } = useForm<StudentFormValues>({
     resolver: zodResolver(schema),
   });
 
@@ -52,7 +52,7 @@ const TeacherForm = ({
 
   return (
     <form className="flex flex-col gap-8 p-4" onSubmit={onSubmit}>
-      <h1 className="text-xl font-semibold">Create a new teacher</h1>
+      <h1 className="text-xl font-semibold">Create a new student</h1>
       <span className="text-xs text-gray-400 font-medium">Authentication Information</span>
       <div className="flex flex-wrap justify-between gap-8">
         {/* Username */}
@@ -178,4 +178,4 @@ const TeacherForm = ({
   )
 }
 
-export default TeacherForm
+export default StudentForm;
