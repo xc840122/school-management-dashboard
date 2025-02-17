@@ -1,41 +1,41 @@
-import Pagination from "@/components/Pagination"
-import Table from "@/components/Table"
-import TableSearchBar from "@/components/TableSearchBar"
-import Image from "next/image"
-import { classesData, role } from "../../../../../public/data/data";
-import FormModal from "@/components/FormModal";
+import Pagination from '@/components/Pagination';
+import Table from '@/components/Table';
+import TableSearchBar from '@/components/TableSearchBar';
+import Image from 'next/image';
+import { classesData, role } from '../../../../../public/data/data';
+import FormModal from '@/components/FormModal';
 
 export type Class = {
-  id: number,
-  name: string,
-  capacity: number,
-  grade: number,
-  supervisor: string,
+  id: number;
+  name: string;
+  capacity: number;
+  grade: number;
+  supervisor: string;
 };
 
 const columns = [
   {
-    header: "Class Name",
-    accessor: "name",
+    header: 'Class Name',
+    accessor: 'name',
   },
   {
-    header: "Capacity",
-    accessor: "capacity",
-    className: "hidden md:table-cell",
+    header: 'Capacity',
+    accessor: 'capacity',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Grade",
-    accessor: "grade",
-    className: "hidden md:table-cell",
+    header: 'Grade',
+    accessor: 'grade',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Supervisor",
-    accessor: "supervisor",
-    className: "hidden md:table-cell",
+    header: 'Supervisor',
+    accessor: 'supervisor',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Actions",
-    accessor: "action",
+    header: 'Actions',
+    accessor: 'action',
   },
 ];
 
@@ -52,19 +52,16 @@ const ClassListPage = async () => {
       <td className="hidden md:table-cell">{item.supervisor}</td>
       <td>
         <div className="flex items-center gap-2">
-          {role ===
-            "admin"
-            ?
+          {role === 'admin' ? (
             <>
               <FormModal table="class" type="update" data={item} />
               <FormModal table="class" type="delete" id={item.id} />
             </>
-            : null
-          }
+          ) : null}
         </div>
       </td>
     </tr>
-  )
+  );
 
   return (
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
@@ -75,15 +72,24 @@ const ClassListPage = async () => {
           <TableSearchBar />
           <div className="flex items-center gap-4">
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/filter.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/filter.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/sort.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/sort.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
-            {role === "admin"
-              ? <FormModal table="class" type="create" />
-              : null
-            }
+            {role === 'admin' ? (
+              <FormModal table="class" type="create" />
+            ) : null}
           </div>
         </div>
       </div>
@@ -92,7 +98,7 @@ const ClassListPage = async () => {
       {/* Pagination */}
       <Pagination />
     </div>
-  )
-}
+  );
+};
 
-export default ClassListPage
+export default ClassListPage;

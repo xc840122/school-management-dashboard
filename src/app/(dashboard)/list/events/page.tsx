@@ -1,9 +1,9 @@
-import Pagination from "@/components/Pagination"
-import Table from "@/components/Table"
-import TableSearchBar from "@/components/TableSearchBar"
-import Image from "next/image"
-import { eventsData, role } from "../../../../../public/data/data";
-import FormModal from "@/components/FormModal";
+import Pagination from '@/components/Pagination';
+import Table from '@/components/Table';
+import TableSearchBar from '@/components/TableSearchBar';
+import Image from 'next/image';
+import { eventsData, role } from '../../../../../public/data/data';
+import FormModal from '@/components/FormModal';
 
 export type Event = {
   id: number;
@@ -16,31 +16,31 @@ export type Event = {
 
 const columns = [
   {
-    header: "Title",
-    accessor: "title",
+    header: 'Title',
+    accessor: 'title',
   },
   {
-    header: "Class",
-    accessor: "class",
+    header: 'Class',
+    accessor: 'class',
   },
   {
-    header: "Date",
-    accessor: "date",
-    className: "hidden md:table-cell",
+    header: 'Date',
+    accessor: 'date',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Start Time",
-    accessor: "startTime",
-    className: "hidden md:table-cell",
+    header: 'Start Time',
+    accessor: 'startTime',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "End Time",
-    accessor: "endTime",
-    className: "hidden md:table-cell",
+    header: 'End Time',
+    accessor: 'endTime',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Actions",
-    accessor: "action",
+    header: 'Actions',
+    accessor: 'action',
   },
 ];
 
@@ -58,20 +58,16 @@ const EventListPage = async () => {
       <td className="hidden md:table-cell">{item.endTime}</td>
       <td>
         <div className="flex items-center gap-2">
-          {role ===
-            "admin"
-            ?
+          {role === 'admin' ? (
             <>
               <FormModal table="event" type="update" data={item} />
               <FormModal table="event" type="delete" id={item.id} />
             </>
-            : null
-          }
+          ) : null}
         </div>
       </td>
     </tr>
-  )
-
+  );
 
   return (
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
@@ -82,15 +78,24 @@ const EventListPage = async () => {
           <TableSearchBar />
           <div className="flex items-center gap-4">
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/filter.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/filter.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/sort.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/sort.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
-            {role === "admin"
-              ? <FormModal table="event" type="create" />
-              : null
-            }
+            {role === 'admin' ? (
+              <FormModal table="event" type="create" />
+            ) : null}
           </div>
         </div>
       </div>
@@ -99,7 +104,7 @@ const EventListPage = async () => {
       {/* Pagination */}
       <Pagination />
     </div>
-  )
-}
+  );
+};
 
-export default EventListPage
+export default EventListPage;

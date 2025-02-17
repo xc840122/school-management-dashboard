@@ -1,7 +1,6 @@
-import Annoucements from "@/components/Annoucements"
-import BigCalendar from "@/components/BigCalendar"
-import EventCalendar from "@/components/EventCalendar"
-
+import Annoucements from '@/components/Annoucements';
+import BigCalendar from '@/components/BigCalendar';
+import EventCalendar from '@/components/EventCalendar';
 
 const StudentPage = async () => {
   return (
@@ -17,7 +16,7 @@ const StudentPage = async () => {
         <Annoucements />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default StudentPage
+export default StudentPage;

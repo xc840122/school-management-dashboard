@@ -1,9 +1,9 @@
-import Pagination from "@/components/Pagination"
-import Table from "@/components/Table"
-import TableSearchBar from "@/components/TableSearchBar"
-import Image from "next/image"
-import { lessonsData, role } from "../../../../../public/data/data";
-import FormModal from "@/components/FormModal";
+import Pagination from '@/components/Pagination';
+import Table from '@/components/Table';
+import TableSearchBar from '@/components/TableSearchBar';
+import Image from 'next/image';
+import { lessonsData, role } from '../../../../../public/data/data';
+import FormModal from '@/components/FormModal';
 
 export type Lesson = {
   id: number;
@@ -14,21 +14,21 @@ export type Lesson = {
 
 const columns = [
   {
-    header: "Subject Name",
-    accessor: "name",
+    header: 'Subject Name',
+    accessor: 'name',
   },
   {
-    header: "Class",
-    accessor: "class",
+    header: 'Class',
+    accessor: 'class',
   },
   {
-    header: "Teacher",
-    accessor: "teacher",
-    className: "hidden md:table-cell",
+    header: 'Teacher',
+    accessor: 'teacher',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Actions",
-    accessor: "action",
+    header: 'Actions',
+    accessor: 'action',
   },
 ];
 
@@ -44,20 +44,16 @@ const LessonListPage = async () => {
       <td className="hidden md:table-cell">{item.teacher}</td>
       <td>
         <div className="flex items-center gap-2">
-          {role ===
-            "admin"
-            ?
+          {role === 'admin' ? (
             <>
               <FormModal table="lesson" type="update" data={item} />
               <FormModal table="lesson" type="delete" id={item.id} />
             </>
-            : null
-          }
+          ) : null}
         </div>
       </td>
     </tr>
-  )
-
+  );
 
   return (
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
@@ -68,15 +64,24 @@ const LessonListPage = async () => {
           <TableSearchBar />
           <div className="flex items-center gap-4">
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/filter.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/filter.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/sort.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/sort.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
-            {role === "admin"
-              ? <FormModal table="lesson" type="create" />
-              : null
-            }
+            {role === 'admin' ? (
+              <FormModal table="lesson" type="create" />
+            ) : null}
           </div>
         </div>
       </div>
@@ -85,7 +90,7 @@ const LessonListPage = async () => {
       {/* Pagination */}
       <Pagination />
     </div>
-  )
-}
+  );
+};
 
-export default LessonListPage
+export default LessonListPage;

@@ -1,9 +1,9 @@
-import Pagination from "@/components/Pagination"
-import Table from "@/components/Table"
-import TableSearchBar from "@/components/TableSearchBar"
-import Image from "next/image"
-import Link from "next/link";
-import { resultsData, role } from "../../../../../public/data/data";
+import Pagination from '@/components/Pagination';
+import Table from '@/components/Table';
+import TableSearchBar from '@/components/TableSearchBar';
+import Image from 'next/image';
+import Link from 'next/link';
+import { resultsData, role } from '../../../../../public/data/data';
 
 export type Result = {
   id: number;
@@ -18,36 +18,36 @@ export type Result = {
 
 const columns = [
   {
-    header: "Subject Name",
-    accessor: "name",
+    header: 'Subject Name',
+    accessor: 'name',
   },
   {
-    header: "Student",
-    accessor: "student",
+    header: 'Student',
+    accessor: 'student',
   },
   {
-    header: "Score",
-    accessor: "score",
-    className: "hidden md:table-cell",
+    header: 'Score',
+    accessor: 'score',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Teacher",
-    accessor: "teacher",
-    className: "hidden md:table-cell",
+    header: 'Teacher',
+    accessor: 'teacher',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Class",
-    accessor: "class",
-    className: "hidden md:table-cell",
+    header: 'Class',
+    accessor: 'class',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Date",
-    accessor: "date",
-    className: "hidden md:table-cell",
+    header: 'Date',
+    accessor: 'date',
+    className: 'hidden md:table-cell',
   },
   {
-    header: "Actions",
-    accessor: "action",
+    header: 'Actions',
+    accessor: 'action',
   },
 ];
 
@@ -66,21 +66,30 @@ const ResultListPage = async () => {
       <td className="hidden md:table-cell">{item.date}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={"/list/teachers/${teacher.id}"}>
+          <Link href={'/list/teachers/${teacher.id}'}>
             <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
-              <Image src={"/images/edit.png"} alt="Edit" width={16} height={16} />
+              <Image
+                src={'/images/edit.png'}
+                alt="Edit"
+                width={16}
+                height={16}
+              />
             </button>
           </Link>
-          {role === "admin" ? (
+          {role === 'admin' ? (
             <button className="flex items-center justify-center rounded-full bg-CPurple w-7 h-7">
-              <Image src={"/images/delete.png"} alt="Delete" width={16} height={16} />
-            </button>) : null
-          }
+              <Image
+                src={'/images/delete.png'}
+                alt="Delete"
+                width={16}
+                height={16}
+              />
+            </button>
+          ) : null}
         </div>
       </td>
     </tr>
-  )
-
+  );
 
   return (
     <div className="flex-1 bg-white p-4 m-4 mt-0 rounded-md">
@@ -91,13 +100,28 @@ const ResultListPage = async () => {
           <TableSearchBar />
           <div className="flex items-center gap-4">
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/filter.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/filter.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/sort.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/sort.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
             <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-              <Image src="/images/plus.png" width={14} height={14} alt="filter" />
+              <Image
+                src="/images/plus.png"
+                width={14}
+                height={14}
+                alt="filter"
+              />
             </button>
           </div>
         </div>
@@ -107,7 +131,7 @@ const ResultListPage = async () => {
       {/* Pagination */}
       <Pagination />
     </div>
-  )
-}
+  );
+};
 
-export default ResultListPage
+export default ResultListPage;

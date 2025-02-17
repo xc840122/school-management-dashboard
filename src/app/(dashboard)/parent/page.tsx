@@ -1,5 +1,5 @@
-import Annoucements from "@/components/Annoucements"
-import BigCalendar from "@/components/BigCalendar"
+import Annoucements from '@/components/Annoucements';
+import BigCalendar from '@/components/BigCalendar';
 
 const ParentPage = async () => {
   return (
@@ -14,7 +14,7 @@ const ParentPage = async () => {
         <Annoucements />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ParentPage
+export default ParentPage;
