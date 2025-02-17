@@ -74,7 +74,6 @@ model Parent {
 model Grade {
   id    Int @id @default(autoincrement())
   level Int @unique
-
   students Student[]
   classess Class[]
 }

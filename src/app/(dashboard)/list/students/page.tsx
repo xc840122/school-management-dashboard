@@ -3,20 +3,13 @@ import Table from '@/components/Table';
 import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
 import Link from 'next/link';
-import { role, studentsData } from '../../../../../public/data/data';
+import { role } from '../../../../../public/data/data';
 import FormModal from '@/components/FormModal';
+import { Grade, Student } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
+import { ITEM_PER_PAGE } from '@/lib/settings';
 
-export type Student = {
-  id: number;
-  studentId: string;
-  name: string;
-  email?: string;
-  photo: string;
-  phone?: string;
-  grade: number;
-  class: string;
-  address: string;
-};
+type StudentList = Student & { grade: Grade };
 
 const columns = [
   {
@@ -49,16 +42,38 @@ const columns = [
   },
 ];
 
-const StudentListPage = async () => {
+const StudentListPage = async ({
+  searchParams }: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }) => {
+
+  // Get page params (string)
+  const { page } = await searchParams;
+
+  // Convert to page number (number),if not carry page value, default value is 1
+  const pageNumber = parseInt(page) || 1
+
+  // fetch data and count from database
+  const [students, count] = await prisma.$transaction([
+    prisma.student.findMany({
+      include: {
+        grade: true,
+      },
+      take: ITEM_PER_PAGE,
+      skip: (pageNumber - 1) * ITEM_PER_PAGE,
+    }),
+    prisma.student.count(),
+  ]);
+
   // function to render the row
-  const renderRow = (item: Student) => (
+  const renderRow = (item: StudentList) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 bg-slate-50 hover:bg-CPurpleLight"
     >
       <td className="flex item-center gap-4 p-4">
         <Image
-          src={item.photo}
+          src={item.img || '/images/noAvatar.png'}
           alt="photo"
           width={40}
           height={40}
@@ -69,8 +84,8 @@ const StudentListPage = async () => {
           <p className="text-xs text-gray-500">{item.email}</p>
         </div>
       </td>
-      <td className="hidden md:table-cell">{item.studentId}</td>
-      <td className="hidden md:table-cell">{item.grade}</td>
+      <td className="hidden md:table-cell">{item.id}</td>
+      <td className="hidden md:table-cell">{item.grade.level}</td>
       <td className="hidden md:table-cell">{item.phone}</td>
       <td className="hidden md:table-cell">{item.address}</td>
       <td>
@@ -86,7 +101,7 @@ const StudentListPage = async () => {
             </button>
           </Link>
           {role === 'admin' ? (
-            <FormModal table="student" type="delete" id={item.id} />
+            <FormModal table="student" type="delete" />
           ) : null}
         </div>
       </td>
@@ -124,9 +139,9 @@ const StudentListPage = async () => {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={studentsData} />
+      <Table columns={columns} renderRow={renderRow} data={students} />
       {/* Pagination */}
-      <Pagination />
+      <Pagination currentPage={pageNumber} count={count} />
     </div>
   );
 };
