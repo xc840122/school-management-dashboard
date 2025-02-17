@@ -7,6 +7,7 @@ import { role } from '../../../../../public/data/data';
 import FormModal from '@/components/FormModal';
 import { Class, Subject, Teacher } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
+import { ITEM_PER_PAGE } from '@/lib/settings';
 
 type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] };
 
@@ -46,17 +47,24 @@ const columns = [
   },
 ];
 
-const TeacherListPage = async () => {
+const TeacherListPage = async ({
+  searchParams
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) => {
+
+  // Get search params
+  const { page } = await searchParams;
+
   // fetch data from database
   const teachers: TeacherList[] = await prisma.teacher.findMany({
     include: {
       subjects: true,
       classes: true,
     },
-    take: 10,
+    take: ITEM_PER_PAGE,
+    skip: ITEM_PER_PAGE * ((page ? parseInt(page) : 1) - 1), // pagination,minimal page is 1 even no search params of page
   });
-
-  // console.log(teachers);
 
   // function to render the row
   const renderRow = (item: TeacherList) => (
