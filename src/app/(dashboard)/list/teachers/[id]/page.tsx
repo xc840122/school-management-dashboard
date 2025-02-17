@@ -1,9 +1,9 @@
-import Annoucements from "@/components/Annoucements"
-import BigCalendar from "@/components/BigCalendar"
-import FormModal from "@/components/FormModal"
-import PerformanceChart from "@/components/PerformanceChart"
-import Image from "next/image"
-import Link from "next/link"
+import Annoucements from '@/components/Annoucements';
+import BigCalendar from '@/components/BigCalendar';
+import FormModal from '@/components/FormModal';
+import PerformanceChart from '@/components/PerformanceChart';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const SingleTeacherPage = () => {
   return (
@@ -16,7 +16,9 @@ const SingleTeacherPage = () => {
           <div className="flex flex-1 bg-CSky py-6 px-4 rouned-md">
             <div className="w-1/3">
               <Image
-                src={"https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200"}
+                src={
+                  'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200'
+                }
                 alt="Portrait"
                 width={144}
                 height={144}
@@ -33,17 +35,18 @@ const SingleTeacherPage = () => {
                   type="update"
                   id={1}
                   data={{
-                    username: "deanguerrero",
-                    email: "deanguerrero@gmail.com",
-                    password: "password",
-                    firstName: "Dean",
-                    lastName: "Guerrero",
-                    phone: "+1 234 567 89",
-                    address: "1234 Main St, Anytown, USA",
-                    bloodType: "A",
-                    birthday: "2000-01-01",
-                    gender: "male",
-                    avatar: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                    username: 'deanguerrero',
+                    email: 'deanguerrero@gmail.com',
+                    password: 'password',
+                    firstName: 'Dean',
+                    lastName: 'Guerrero',
+                    phone: '+1 234 567 89',
+                    address: '1234 Main St, Anytown, USA',
+                    bloodType: 'A',
+                    birthday: '2000-01-01',
+                    gender: 'male',
+                    avatar:
+                      'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200',
                   }}
                 />
               </div>
@@ -52,19 +55,39 @@ const SingleTeacherPage = () => {
               </p>
               <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
                 <div className="flex items-center justify-start gap-2 w-full md:w-1/3 lg:w-full 2xl:w-1/3">
-                  <Image src={"/images/blood.png"} alt="Blood" width={14} height={14} />
+                  <Image
+                    src={'/images/blood.png'}
+                    alt="Blood"
+                    width={14}
+                    height={14}
+                  />
                   <span>A+</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 w-full md:w-1/3 lg:w-full 2xl:w-1/3">
-                  <Image src={"/images/date.png"} alt="Date" width={14} height={14} />
+                  <Image
+                    src={'/images/date.png'}
+                    alt="Date"
+                    width={14}
+                    height={14}
+                  />
                   <span>January 2025</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 w-full md:w-1/3 lg:w-full 2xl:w-1/3">
-                  <Image src={"/images/mail.png"} alt="Blood" width={14} height={14} />
+                  <Image
+                    src={'/images/mail.png'}
+                    alt="Blood"
+                    width={14}
+                    height={14}
+                  />
                   <span>user@gmail.com+</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 w-full md:w-1/3 lg:w-full 2xl:w-1/3">
-                  <Image src={"/images/phone.png"} alt="Phone" width={14} height={14} />
+                  <Image
+                    src={'/images/phone.png'}
+                    alt="Phone"
+                    width={14}
+                    height={14}
+                  />
                   <span>+1 234 567</span>
                 </div>
               </div>
@@ -141,28 +164,37 @@ const SingleTeacherPage = () => {
         <div className="bg-white p-4 rounded-md">
           <h1 className="text-xl font-semibold">Shortcuts</h1>
           <div className="flex justify-start items-center flex-wrap gap-4 mt-4 text-gray-500">
-            <Link
-              className="p-3 rounded-md bg-CSkyLight"
-              href="/list/teachers">Teacher&apos;s Classes</Link>
+            <Link className="p-3 rounded-md bg-CSkyLight" href="/list/teachers">
+              Teacher&apos;s Classes
+            </Link>
             <Link
               className="p-3 rounded-md bg-CPurpleLight"
-              href="/list/students">Teacher&apos;s Students</Link>
+              href="/list/students"
+            >
+              Teacher&apos;s Students
+            </Link>
             <Link
               className="p-3 rounded-md bg-CYellowLight"
-              href="/list/lessons">Teacher&apos;s Lessons</Link>
-            <Link
-              className="p-3 rounded-md bg-pink-50"
-              href="/list/exams">Teacher&apos;s Exams</Link>
+              href="/list/lessons"
+            >
+              Teacher&apos;s Lessons
+            </Link>
+            <Link className="p-3 rounded-md bg-pink-50" href="/list/exams">
+              Teacher&apos;s Exams
+            </Link>
             <Link
               className="p-3 rounded-md bg-CSkyLight"
-              href="/list/assignments">Teacher&apos;s Assignments</Link>
+              href="/list/assignments"
+            >
+              Teacher&apos;s Assignments
+            </Link>
           </div>
         </div>
         <PerformanceChart />
         <Annoucements />
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default SingleTeacherPage
+export default SingleTeacherPage;

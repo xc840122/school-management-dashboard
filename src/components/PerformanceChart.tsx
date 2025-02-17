@@ -1,10 +1,10 @@
-'use client'
-import Image from "next/image"
+'use client';
+import Image from 'next/image';
 import { PieChart, Pie, ResponsiveContainer } from 'recharts';
 
 const data = [
-  { name: 'Group A', value: 92, fill: "#C3EBFA" },
-  { name: 'Group B', value: 8, fill: "#FAE27C" },
+  { name: 'Group A', value: 92, fill: '#C3EBFA' },
+  { name: 'Group B', value: 8, fill: '#FAE27C' },
 ];
 
 const PerformanceChart = () => {
@@ -13,7 +13,7 @@ const PerformanceChart = () => {
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-semibold">Performance</h1>
         <Image
-          src={"/images/moreDark.png"}
+          src={'/images/moreDark.png'}
           alt="MoreDark"
           width={16}
           height={16}
@@ -34,14 +34,14 @@ const PerformanceChart = () => {
         </PieChart>
       </ResponsiveContainer>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 className="text-3xl font-bold">
-          9.2
-        </h1>
+        <h1 className="text-3xl font-bold">9.2</h1>
         <p className="text-xs text-gray-300">of 10 max</p>
       </div>
-      <h2 className="absolute bottom-16 left-0 right-0 text-center font-medium">1st Semester - 2nd Semester</h2>
-    </div >
-  )
-}
+      <h2 className="absolute bottom-16 left-0 right-0 text-center font-medium">
+        1st Semester - 2nd Semester
+      </h2>
+    </div>
+  );
+};
 
-export default PerformanceChart
+export default PerformanceChart;

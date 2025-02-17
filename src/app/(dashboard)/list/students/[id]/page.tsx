@@ -1,8 +1,8 @@
-import Annoucements from "@/components/Annoucements"
-import BigCalendar from "@/components/BigCalendar"
-import PerformanceChart from "@/components/PerformanceChart"
-import Image from "next/image"
-import Link from "next/link"
+import Annoucements from '@/components/Annoucements';
+import BigCalendar from '@/components/BigCalendar';
+import PerformanceChart from '@/components/PerformanceChart';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const SingleStudentPage = () => {
   return (
@@ -15,7 +15,9 @@ const SingleStudentPage = () => {
           <div className="flex flex-1 bg-CSky py-6 px-4 rouned-md">
             <div className="w-1/3">
               <Image
-                src={"https://images.pexels.com/photos/5414817/pexels-photo-5414817.jpeg?auto=compress&cs=tinysrgb&w=1200"}
+                src={
+                  'https://images.pexels.com/photos/5414817/pexels-photo-5414817.jpeg?auto=compress&cs=tinysrgb&w=1200'
+                }
                 alt="Portrait"
                 width={144}
                 height={144}
@@ -30,19 +32,39 @@ const SingleStudentPage = () => {
               </p>
               <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
                 <div className="flex items-center justify-start gap-2 w-full md:w-1/3 lg:w-full 2xl:w-1/3">
-                  <Image src={"/images/blood.png"} alt="Blood" width={14} height={14} />
+                  <Image
+                    src={'/images/blood.png'}
+                    alt="Blood"
+                    width={14}
+                    height={14}
+                  />
                   <span>A+</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 w-full md:w-1/3 lg:w-full 2xl:w-1/3">
-                  <Image src={"/images/date.png"} alt="Date" width={14} height={14} />
+                  <Image
+                    src={'/images/date.png'}
+                    alt="Date"
+                    width={14}
+                    height={14}
+                  />
                   <span>January 2025</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 w-full md:w-1/3 lg:w-full 2xl:w-1/3">
-                  <Image src={"/images/mail.png"} alt="Blood" width={14} height={14} />
+                  <Image
+                    src={'/images/mail.png'}
+                    alt="Blood"
+                    width={14}
+                    height={14}
+                  />
                   <span>user@gmail.com+</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 w-full md:w-1/3 lg:w-full 2xl:w-1/3">
-                  <Image src={"/images/phone.png"} alt="Phone" width={14} height={14} />
+                  <Image
+                    src={'/images/phone.png'}
+                    alt="Phone"
+                    width={14}
+                    height={14}
+                  />
                   <span>+1 234 567</span>
                 </div>
               </div>
@@ -119,28 +141,37 @@ const SingleStudentPage = () => {
         <div className="bg-white p-4 rounded-md">
           <h1 className="text-xl font-semibold">Shortcuts</h1>
           <div className="flex justify-start items-center flex-wrap gap-4 mt-4 text-gray-500">
-            <Link
-              className="p-3 rounded-md bg-CSkyLight"
-              href="/list/lessons">Student&apos;s Lessons</Link>
+            <Link className="p-3 rounded-md bg-CSkyLight" href="/list/lessons">
+              Student&apos;s Lessons
+            </Link>
             <Link
               className="p-3 rounded-md bg-CPurpleLight"
-              href="/list/teachers">Student&apos;s Teachers</Link>
+              href="/list/teachers"
+            >
+              Student&apos;s Teachers
+            </Link>
             <Link
               className="p-3 rounded-md bg-CYellowLight"
-              href="/list/results">Student&apos;s Results</Link>
-            <Link
-              className="p-3 rounded-md bg-pink-50"
-              href="/list/exams">Student&apos;s Exams</Link>
+              href="/list/results"
+            >
+              Student&apos;s Results
+            </Link>
+            <Link className="p-3 rounded-md bg-pink-50" href="/list/exams">
+              Student&apos;s Exams
+            </Link>
             <Link
               className="p-3 rounded-md bg-CSkyLight"
-              href="/list/assignments">Student&apos;s Assignments</Link>
+              href="/list/assignments"
+            >
+              Student&apos;s Assignments
+            </Link>
           </div>
         </div>
         <PerformanceChart />
         <Annoucements />
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default SingleStudentPage
+export default SingleStudentPage;

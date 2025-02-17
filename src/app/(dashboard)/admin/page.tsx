@@ -1,9 +1,9 @@
-import Annoucements from "@/components/Annoucements"
-import AttendanceChart from "@/components/AttendanceChart"
-import CountChart from "@/components/CountChart"
-import EventCalendar from "@/components/EventCalendar"
-import FinanceChart from "@/components/FinanceChart"
-import UserCard from "@/components/UserCard"
+import Annoucements from '@/components/Annoucements';
+import AttendanceChart from '@/components/AttendanceChart';
+import CountChart from '@/components/CountChart';
+import EventCalendar from '@/components/EventCalendar';
+import FinanceChart from '@/components/FinanceChart';
+import UserCard from '@/components/UserCard';
 
 const AdminPage = async () => {
   return (
@@ -39,7 +39,7 @@ const AdminPage = async () => {
         <Annoucements />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AdminPage
+export default AdminPage;
