@@ -155,7 +155,7 @@ const TeacherListPage = async ({
       {/* List */}
       <Table columns={columns} renderRow={renderRow} data={teachers} />
       {/* Pagination */}
-      <Pagination page={pageNumber} count={count} />
+      <Pagination currentPage={pageNumber} count={count} />
     </div>
   );
 };
