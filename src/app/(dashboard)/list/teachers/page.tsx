@@ -56,15 +56,23 @@ const TeacherListPage = async ({
   // Get search params
   const { page } = await searchParams;
 
-  // fetch data from database
-  const teachers: TeacherList[] = await prisma.teacher.findMany({
-    include: {
-      subjects: true,
-      classes: true,
-    },
-    take: ITEM_PER_PAGE,
-    skip: ITEM_PER_PAGE * ((page ? parseInt(page) : 1) - 1), // pagination,minimal page is 1 even no search params of page
-  });
+
+  // Get page number
+  const pageNumber = page ? parseInt(page) : 1;
+
+
+  // fetch data and count from database
+  const [teachers, count] = await prisma.$transaction([
+    prisma.teacher.findMany({
+      include: {
+        subjects: true,
+        classes: true,
+      },
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (pageNumber - 1), // pagination,minimal page is 1 even no search params of page
+    }),
+    prisma.teacher.count(),
+  ]);
 
   // function to render the row
   const renderRow = (item: TeacherList) => (
@@ -147,7 +155,7 @@ const TeacherListPage = async ({
       {/* List */}
       <Table columns={columns} renderRow={renderRow} data={teachers} />
       {/* Pagination */}
-      <Pagination />
+      <Pagination page={pageNumber} count={count} />
     </div>
   );
 };
