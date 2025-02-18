@@ -9,8 +9,6 @@ import { Class, Prisma, Subject, Teacher } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 
-type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] };
-
 const columns = [
   {
     header: 'Info',
@@ -46,6 +44,8 @@ const columns = [
     accessor: 'action',
   },
 ];
+
+export type TeacherItem = Teacher & { subjects: Subject[] } & { classes: Class[] };
 
 const TeacherListPage = async ({
   searchParams
@@ -102,7 +102,7 @@ const TeacherListPage = async ({
     ]);
 
     // function to render the row
-    const renderRow = (item: TeacherList) => (
+    const renderRow = (item: TeacherItem) => (
       <tr
         key={item.id}
         className="border-b border-gray-200 bg-slate-50 hover:bg-CPurpleLight"

@@ -33,7 +33,7 @@ const columns = [
     accessor: 'action',
   },
 ];
-type ParentItem = Parent & { students: Student[] };
+export type ParentItem = Parent & { students: Student[] };
 
 const ParentListPage = async ({
   searchParams

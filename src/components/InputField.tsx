@@ -7,13 +7,13 @@ type InputTypeProps = {
   type?: string;
   placeholder: string;
   register:
-    | UseFormRegister<TeacherFormValues>
-    | UseFormRegister<StudentFormValues>;
+  | UseFormRegister<TeacherFormValues>
+  | UseFormRegister<StudentFormValues>;
   name: keyof TeacherFormValues | keyof StudentFormValues;
   defaultValue?: string;
   error?:
-    | FieldErrors<TeacherFormValues>[keyof TeacherFormValues]
-    | FieldErrors<StudentFormValues>[keyof StudentFormValues];
+  | FieldErrors<TeacherFormValues>[keyof TeacherFormValues]
+  | FieldErrors<StudentFormValues>[keyof StudentFormValues];
   InputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 };
 

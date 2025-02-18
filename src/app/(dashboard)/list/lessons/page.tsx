@@ -28,7 +28,7 @@ const columns = [
   },
 ];
 
-type LessonItem = Lesson & { subject: { name: string }, teacher: { name: string, surname: string }, class: { name: string } };
+export type LessonItem = Lesson & { subject: { name: string }, teacher: { name: string, surname: string }, class: { name: string } };
 
 const LessonListPage = async ({ searchParams
 }: {

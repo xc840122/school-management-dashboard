@@ -34,7 +34,7 @@ const columns = [
   },
 ];
 // supervisor can be null must add option
-type ClassItem = Class & { supervisor: Teacher | null };
+export type ClassItem = Class & { supervisor: Teacher | null };
 
 const ClassListPage = async ({ searchParams
 }: {

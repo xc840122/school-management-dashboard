@@ -23,7 +23,7 @@ const columns = [
     accessor: 'action',
   },
 ];
-type SubjectItem = Subject & { teachers: Teacher[] };
+export type SubjectItem = Subject & { teachers: Teacher[] };
 
 const SubjectListPage = async ({ searchParams
 }: {

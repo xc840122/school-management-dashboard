@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import InputField from '../InputField';
 import Image from 'next/image';
+import { TeacherItem } from '@/app/(dashboard)/list/teachers/page';
 
 const schema = z.object({
   username: z
@@ -40,7 +41,7 @@ const TeacherForm = ({
   data,
 }: {
   type: 'create' | 'update';
-  data?: TeacherFormValues;
+  data?: TeacherItem;
 }) => {
   const {
     register,
@@ -75,7 +76,7 @@ const TeacherForm = ({
           label="Email"
           name="email"
           placeholder="Email"
-          defaultValue={data?.email}
+          defaultValue={data?.email?.toString()}
           register={register}
           error={errors?.email}
         />
@@ -84,7 +85,7 @@ const TeacherForm = ({
           label="Password"
           name="password"
           placeholder="Password"
-          defaultValue={data?.password}
+          // defaultValue={data?.password}
           register={register}
           error={errors?.password}
           type="password"
@@ -99,7 +100,7 @@ const TeacherForm = ({
           label="First Name"
           name="firstName"
           placeholder="First Name"
-          defaultValue={data?.firstName}
+          defaultValue={data?.surname}
           register={register}
           error={errors?.firstName}
         />
@@ -108,7 +109,7 @@ const TeacherForm = ({
           label="Last Name"
           name="lastName"
           placeholder="Last Name"
-          defaultValue={data?.lastName}
+          defaultValue={data?.name}
           register={register}
           error={errors?.lastName}
         />
@@ -117,7 +118,7 @@ const TeacherForm = ({
           label="Phone"
           name="phone"
           placeholder="Phone"
-          defaultValue={data?.phone}
+          defaultValue={data?.phone?.toString()}
           register={register}
           error={errors?.phone}
         />

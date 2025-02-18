@@ -1,9 +1,13 @@
 'use client';
 import Image from 'next/image';
 import { JSX, useEffect, useState } from 'react';
-import { TeacherFormValues } from './forms/TeacherForm';
-import { StudentFormValues } from './forms/StudentForm';
 import dynamic from 'next/dynamic';
+import { TeacherItem } from '@/app/(dashboard)/list/teachers/page';
+import { StudentItem } from '@/app/(dashboard)/list/students/page';
+import { LessonItem } from '@/app/(dashboard)/list/lessons/page';
+import { SubjectItem } from '@/app/(dashboard)/list/subjects/page';
+import { ParentItem } from '@/app/(dashboard)/list/parents/page';
+import { ClassItem } from '@/app/(dashboard)/list/classes/page';
 
 // for client component, optimize the loading of the form components
 const TeacherForm = dynamic(() => import('./forms/TeacherForm'), {
@@ -17,14 +21,14 @@ const StudentForm = dynamic(() => import('./forms/StudentForm'), {
 const forms: {
   [key: string]: (
     type: 'create' | 'update',
-    data?: TeacherFormValues | StudentFormValues
+    data?: TeacherItem | StudentItem
   ) => JSX.Element;
 } = {
   teacher: (type, data) => (
-    <TeacherForm type={type} data={data as TeacherFormValues} />
+    <TeacherForm type={type} data={data as TeacherItem} />
   ),
   student: (type, data) => (
-    <StudentForm type={type} data={data as StudentFormValues} />
+    <StudentForm type={type} data={data as StudentItem} />
   ),
 };
 
@@ -48,7 +52,7 @@ const FormModal = ({
   | 'event'
   | 'announcement';
   type: 'create' | 'update' | 'delete';
-  data?: any;
+  data?: TeacherItem | StudentItem | ClassItem | ParentItem | SubjectItem | LessonItem;
   id?: number | string;
 }) => {
   const size = type === 'create' ? 'w-8 h-8' : 'w-7 h-7';
@@ -95,9 +99,9 @@ const FormModal = ({
           </form>
         ) : null;
       case 'update':
-        return id ? forms[table](type, data) : null;
+        return id ? forms[table](type, data as TeacherItem | StudentItem) : null;
       case 'create':
-        return forms[table](type, data);
+        return forms[table](type, data as TeacherItem | StudentItem);
       default:
         return null;
     }
