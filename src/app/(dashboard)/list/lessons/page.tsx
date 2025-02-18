@@ -4,7 +4,7 @@ import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
 import { role } from '../../../../../public/data/data';
 import FormModal from '@/components/FormModal';
-import { Class, Lesson, Prisma, Subject, Teacher } from '@prisma/client';
+import { Lesson, Prisma } from '@prisma/client';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { prisma } from '@/lib/prisma';
 
@@ -28,7 +28,7 @@ const columns = [
   },
 ];
 
-type LessonItem = Lesson & { subject: Subject } & { teacher: Teacher } & { class: Class };
+type LessonItem = Lesson & { subject: { name: string }, teacher: { name: string, surname: string }, class: { name: string } };
 
 const LessonListPage = async ({ searchParams
 }: {
