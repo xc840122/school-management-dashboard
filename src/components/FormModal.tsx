@@ -35,21 +35,21 @@ const FormModal = ({
   id,
 }: {
   table:
-    | 'teacher'
-    | 'student'
-    | 'parent'
-    | 'subject'
-    | 'class'
-    | 'lesson'
-    | 'exam'
-    | 'assignment'
-    | 'result'
-    | 'attendance'
-    | 'event'
-    | 'announcement';
+  | 'teacher'
+  | 'student'
+  | 'parent'
+  | 'subject'
+  | 'class'
+  | 'lesson'
+  | 'exam'
+  | 'assignment'
+  | 'result'
+  | 'attendance'
+  | 'event'
+  | 'announcement';
   type: 'create' | 'update' | 'delete';
-  data?: TeacherFormValues | StudentFormValues;
-  id?: string;
+  data?: any;
+  id?: number | string;
 }) => {
   const size = type === 'create' ? 'w-8 h-8' : 'w-7 h-7';
   const bgColor =

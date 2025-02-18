@@ -63,7 +63,7 @@ const StudentListPage = async ({
         switch (key) {
           // Filtering teachers by checking if they have any lessons associated with the specified class-id
           // Chrome convert upper case to lowercase automatically, so better use lowercase for query params
-          case "teacher":
+          case "teacherId":
             query.class = {
               lessons: {
                 some: {
@@ -75,6 +75,9 @@ const StudentListPage = async ({
           // Filtering by teacher's name
           case "search":
             query.name = { contains: value, mode: 'insensitive' }
+            break;
+          default:
+            break;
         }
       }
     }
@@ -118,7 +121,7 @@ const StudentListPage = async ({
         <td className="hidden md:table-cell">{item.address}</td>
         <td>
           <div className="flex items-center gap-2">
-            <Link href={'/list/teachers/${teacher.id}'}>
+            <Link href={'/list/students/${student.id}'}>
               <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
                 <Image
                   src={'/images/view.png'}

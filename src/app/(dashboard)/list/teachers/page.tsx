@@ -69,7 +69,7 @@ const TeacherListPage = async ({
         switch (key) {
           // Filtering teachers by checking if they have any lessons associated with the specified class id
           // Chrome convert upper case to lowercase automatically, so better use lowercase for query params
-          case "class":
+          case "classId":
             query.lessons = {
               some: {
                 classId: parseInt(value)
@@ -79,6 +79,9 @@ const TeacherListPage = async ({
           // Filtering by teacher's name
           case "search":
             query.name = { contains: value, mode: 'insensitive' }
+            break;
+          default:
+            break;
         }
       }
     }
