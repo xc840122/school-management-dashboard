@@ -9,6 +9,7 @@ import { SubjectItem } from '@/app/(dashboard)/list/subjects/page';
 import { ParentItem } from '@/app/(dashboard)/list/parents/page';
 import { ClassItem } from '@/app/(dashboard)/list/classes/page';
 import { ExamItem } from '@/app/(dashboard)/list/exams/page';
+import { AssignmentItem } from '@/app/(dashboard)/list/assignments/page';
 
 // for client component, optimize the loading of the form components
 const TeacherForm = dynamic(() => import('./forms/TeacherForm'), {
@@ -60,7 +61,8 @@ const FormModal = ({
   | ParentItem
   | SubjectItem
   | LessonItem
-  | ExamItem;
+  | ExamItem
+  | AssignmentItem;
   id?: number | string;
 }) => {
   const size = type === 'create' ? 'w-8 h-8' : 'w-7 h-7';
