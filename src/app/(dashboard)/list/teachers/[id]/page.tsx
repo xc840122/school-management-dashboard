@@ -164,18 +164,20 @@ const SingleTeacherPage = () => {
         <div className="bg-white p-4 rounded-md">
           <h1 className="text-xl font-semibold">Shortcuts</h1>
           <div className="flex justify-start items-center flex-wrap gap-4 mt-4 text-gray-500">
-            <Link className="p-3 rounded-md bg-CSkyLight" href="/list/teachers">
+            <Link className="p-3 rounded-md bg-CSkyLight"
+              href={`/list/classes?supervisorId=${"teacher2"}`}
+            >
               Teacher&apos;s Classes
             </Link>
             <Link
               className="p-3 rounded-md bg-CPurpleLight"
-              href="/list/students"
+              href={`/list/students?teacherId=${"teacher2"}`}
             >
               Teacher&apos;s Students
             </Link>
             <Link
               className="p-3 rounded-md bg-CYellowLight"
-              href="/list/lessons"
+              href={`/list/lessons?teacherId=${"teacher2"}`}
             >
               Teacher&apos;s Lessons
             </Link>
