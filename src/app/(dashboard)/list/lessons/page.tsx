@@ -28,7 +28,11 @@ const columns = [
   },
 ];
 
-export type LessonItem = Lesson & { subject: { name: string }, teacher: { name: string, surname: string }, class: { name: string } };
+export type LessonItem = Lesson & {
+  subject: { name: string },
+  teacher: { name: string, surname: string },
+  class: { name: string }
+};
 
 const LessonListPage = async ({ searchParams
 }: {
@@ -56,7 +60,10 @@ const LessonListPage = async ({ searchParams
             query.teacherId = value;
             break;
           case "search":
-            query.name = { contains: value, mode: 'insensitive' };
+            query.OR = [
+              { subject: { name: { contains: value, mode: 'insensitive' } } },
+              { teacher: { name: { contains: value, mode: 'insensitive' } } },
+            ];
             break;
           default:
             break;
