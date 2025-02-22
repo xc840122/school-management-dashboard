@@ -2,12 +2,14 @@ import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
-import { role } from '../../../../../public/data/data';
 import FormModal from '@/components/FormModal';
 import { Assignment, Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
+import { getRole, getUserId } from '@/lib/util';
 
+// Get role
+const role = await getRole();
 const columns = [
   {
     header: 'Subject Name',
@@ -27,10 +29,10 @@ const columns = [
     accessor: 'dueDate',
     className: 'hidden md:table-cell',
   },
-  {
+  role === 'admin' || role === 'teacher' ? {
     header: 'Actions',
     accessor: 'action',
-  },
+  } : null,
 ];
 
 export type AssignmentItem = Assignment & {
@@ -55,17 +57,19 @@ const AssignmentListPage = async ({ searchParams
   // Query params visiting condition
   const query: Prisma.AssignmentWhereInput = {};
 
+  // before using query.lesson.classId = parseInt(value) 
+  // is because JavaScript does not automatically create nested objects.
+  query.lesson = {};
+
   // URL params visiting condition
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
           case "studentId":
-            query.lesson = {
-              class: { students: { some: { id: value } } }
-            };
+            query.lesson.classId = parseInt(value)
           case "teacherId":
-            query.lesson = { teacherId: value };
+            query.lesson.teacherId = value;
           case "search":
             query.OR = [
               { lesson: { subject: { name: { contains: value, mode: 'insensitive' } } } },
@@ -77,6 +81,33 @@ const AssignmentListPage = async ({ searchParams
             break;
         }
       }
+    }
+
+    const userId = await getUserId();
+
+    // Role condition
+    switch (role) {
+      case 'admin':
+        break;
+      case 'teacher':
+        query.lesson.teacherId = userId ?? '';
+        break;
+      case 'student':
+        query.lesson.class = {
+          students: {
+            some: { id: userId ?? '' }
+          },
+        }
+        break;
+      case 'parent':
+        query.lesson.class = {
+          students: {
+            some: { parentId: userId ?? '' }
+          }
+        }
+        break;
+      default:
+        break;
     }
 
     // fetch data and count from database
@@ -113,7 +144,7 @@ const AssignmentListPage = async ({ searchParams
         </td>
         <td>
           <div className="flex items-center gap-2">
-            {role === 'admin' ? (
+            {role === 'admin' || role === 'teacher' ? (
               <>
                 <FormModal table="assignment" type="update" data={item} />
                 <FormModal table="assignment" type="delete" id={item.id} />

@@ -6,11 +6,10 @@ import FormModal from '@/components/FormModal';
 import { Announcement, Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
-import { auth } from '@clerk/nextjs/server';
+import { getRole } from '@/lib/util';
 
-const { sessionClaims } = await auth();
-const role = (sessionClaims?.metadata as { role: string })?.role;
-
+// Get role
+const role = await getRole();
 const columns = [
   {
     header: 'Title',
@@ -39,7 +38,6 @@ const AnnouncementListPage = async ({ searchParams
 }: {
   searchParams: Promise<{ [key: string]: string }>;
 }) => {
-
   // Get search params
   const { page, ...queryParams } = await searchParams;
 
