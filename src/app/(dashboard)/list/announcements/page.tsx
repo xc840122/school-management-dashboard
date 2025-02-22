@@ -2,11 +2,11 @@ import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
-import { role } from '../../../../../public/data/data';
 import FormModal from '@/components/FormModal';
 import { Announcement, Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
+import { currentUserId, role } from '@/lib/utils';
 
 const columns = [
   {
@@ -22,10 +22,10 @@ const columns = [
     accessor: 'date',
     className: 'hidden md:table-cell',
   },
-  {
+  role === 'admin' ? {
     header: 'Actions',
     accessor: 'action',
-  },
+  } : null,
 ];
 
 export type AnnouncementItem = Announcement & {
@@ -36,7 +36,6 @@ const AnnouncementListPage = async ({ searchParams
 }: {
   searchParams: Promise<{ [key: string]: string }>;
 }) => {
-
   // Get search params
   const { page, ...queryParams } = await searchParams;
 
@@ -63,6 +62,18 @@ const AnnouncementListPage = async ({ searchParams
       }
     }
 
+    // Role condition,key is role,value is condition
+    const roleConditionsForEvents = {
+      teacher: { lessons: { some: { teacherId: currentUserId ?? '' } } },
+      student: { students: { some: { id: currentUserId ?? '' } } },
+      parent: { students: { some: { parentId: currentUserId ?? '' } } },
+    }
+
+    query.OR = [
+      { classId: null },
+      { class: roleConditionsForEvents[role as keyof typeof roleConditionsForEvents] }
+    ];
+
     // fetch data and count from database
     const [data, count] = await prisma.$transaction([
       prisma.announcement.findMany({
@@ -84,7 +95,7 @@ const AnnouncementListPage = async ({ searchParams
         className="border-b border-gray-200 bg-slate-50 hover:bg-CPurpleLight"
       >
         <td className="p-4">{item.title}</td>
-        <td>{item.class?.name}</td>
+        <td>{item.class?.name || '-'}</td>
         <td className="hidden md:table-cell">
           {Intl.DateTimeFormat('en-NZ').format(item.date)}
         </td>

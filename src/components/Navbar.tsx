@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import SearchBar from './SearchBar';
+import { UserButton } from "@clerk/nextjs";
+import { currentUser } from '@clerk/nextjs/server';
 
 const Navbar = async () => {
+  const user = await currentUser();
+  const role = user?.publicMetadata.role as string;
   return (
     <nav className="flex items-center justify-between p-4">
       <SearchBar />
@@ -37,15 +41,16 @@ const Navbar = async () => {
         </div>
         <div className="flex flex-col">
           <span className="text-xs leading-3 font-medium">Peter Xu</span>
-          <span className="text-[10px] text-gray-500 text-right">Admin</span>
+          <span className="text-[10px] text-gray-500 text-right">{role}</span>
         </div>
-        <Image
+        {/* <Image
           className="rounded-full"
           src="/images/avatar.png"
           alt="Avatar"
           width={36}
           height={36}
-        />
+        /> */}
+        <UserButton />
       </div>
     </nav>
   );

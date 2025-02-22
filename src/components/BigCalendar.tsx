@@ -22,8 +22,8 @@ const BigCalendar = () => {
       view={view}
       style={{ height: '98%' }}
       onView={onClickViewChange}
-      min={new Date(2025, 2, 12, 8, 0, 0)}
-      max={new Date(2025, 2, 12, 18, 0, 0)}
+      min={new Date(2025, 2, 20, 8, 0, 0)}
+      max={new Date(2025, 2, 20, 18, 0, 0)}
     />
   );
 };
