@@ -6,10 +6,8 @@ import FormModal from '@/components/FormModal';
 import { Assignment, Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
-import { getRole, getUserId } from '@/lib/util';
+import { role, currentUserId } from '@/lib/utils';
 
-// Get role
-const role = await getRole();
 const columns = [
   {
     header: 'Subject Name',
@@ -83,26 +81,24 @@ const AssignmentListPage = async ({ searchParams
       }
     }
 
-    const userId = await getUserId();
-
     // Role condition
     switch (role) {
       case 'admin':
         break;
       case 'teacher':
-        query.lesson.teacherId = userId ?? '';
+        query.lesson.teacherId = currentUserId ?? '';
         break;
       case 'student':
         query.lesson.class = {
           students: {
-            some: { id: userId ?? '' }
+            some: { id: currentUserId ?? '' }
           },
         }
         break;
       case 'parent':
         query.lesson.class = {
           students: {
-            some: { parentId: userId ?? '' }
+            some: { parentId: currentUserId ?? '' }
           }
         }
         break;
