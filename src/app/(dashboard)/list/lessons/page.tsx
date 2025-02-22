@@ -2,11 +2,11 @@ import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
-import { role } from '../../../../../public/data/data';
 import FormModal from '@/components/FormModal';
 import { Lesson, Prisma } from '@prisma/client';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { prisma } from '@/lib/prisma';
+import { currentUserId, role } from '@/lib/utils';
 
 const columns = [
   {
@@ -22,10 +22,10 @@ const columns = [
     accessor: 'teacher',
     className: 'hidden md:table-cell',
   },
-  {
+  role === 'admin' ? {
     header: 'Actions',
     accessor: 'action',
-  },
+  } : null,
 ];
 
 export type LessonItem = Lesson & {
@@ -69,6 +69,27 @@ const LessonListPage = async ({ searchParams
             break;
         }
       }
+    }
+
+    // Role condition
+    switch (role) {
+      case 'admin':
+        break;
+      case 'teacher':
+        query.teacherId = currentUserId ?? '';
+        break;
+      // case 'student':
+      //   query.class = {
+      //     students: { some: { id: currentUserId ?? '' } }
+      //   };
+      //   break;
+      // case 'parent':
+      //   query.class = {
+      //     students: { some: { parentId: currentUserId ?? '' } }
+      //   };
+      //   break;
+      default:
+        break;
     }
 
     // fetch data and count from database
