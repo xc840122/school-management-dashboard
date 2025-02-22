@@ -3,7 +3,7 @@ import Table from '@/components/Table';
 import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
 import FormModal from '@/components/FormModal';
-import { Class, Prisma, Teacher } from '@prisma/client';
+import { Class, Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { role } from '@/lib/utils';
@@ -34,7 +34,7 @@ const columns = [
   } : null,
 ];
 // supervisor can be null must add option
-export type ClassItem = Class & { supervisor: Teacher | null };
+export type ClassItem = Class & { supervisor?: { name: string, surname: string } | null };
 
 const ClassListPage = async ({ searchParams
 }: {
@@ -73,7 +73,7 @@ const ClassListPage = async ({ searchParams
         // where: queryParams, //It doesn't limit params visiting according to roles and services
         where: query,
         include: {
-          supervisor: true,
+          supervisor: { select: { name: true, surname: true } },
           // grade: true,
         },
         take: ITEM_PER_PAGE,
@@ -91,13 +91,13 @@ const ClassListPage = async ({ searchParams
         <td className="hidden md:table-cell">{item.capacity}</td>
         <td className="hidden md:table-cell">{item.name[0]}</td>
         <td className="hidden md:table-cell">
-          {/* {item.supervisor.name + " " + item.supervisor.surname} */}
+          {item.supervisor?.name + " " + item.supervisor?.surname}
         </td>
         <td>
           <div className="flex items-center gap-2">
             {role === 'admin' ? (
               <>
-                <FormModal table="class" type="update" data={data} />
+                <FormModal table="class" type="update" data={item} />
                 <FormModal table="class" type="delete" id={item.id} />
               </>
             ) : null}
