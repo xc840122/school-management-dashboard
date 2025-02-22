@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { currentUser } from '@clerk/nextjs/server';
+
 type MenuItem = {
   title: string;
   items: {
@@ -128,6 +129,7 @@ const menuItems: MenuItem[] = [
 const Menu = async () => {
   const user = await currentUser();
   const role = user?.publicMetadata.role as string;
+  console.log("role is: ", role);
   return (
     <>
       <Link

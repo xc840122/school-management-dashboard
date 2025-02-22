@@ -3,11 +3,11 @@ const Table = async <T,>({
   renderRow,
   data,
 }: {
-  columns: {
+  columns: ({
     header: string;
     accessor: string;
     className?: string;
-  }[];
+  } | null)[];
   renderRow: (item: T) => React.ReactNode;
   data: T[];
 }) => {
@@ -16,8 +16,8 @@ const Table = async <T,>({
       <thead>
         <tr className="text-gray-500 text-left text-sm">
           {columns.map((column) => (
-            <th key={column.accessor} className={column.className}>
-              {column.header}
+            <th key={column?.accessor} className={column?.className}>
+              {column?.header}
             </th>
           ))}
         </tr>

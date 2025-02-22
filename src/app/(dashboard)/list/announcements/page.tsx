@@ -2,11 +2,14 @@ import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
-import { role } from '../../../../../public/data/data';
 import FormModal from '@/components/FormModal';
 import { Announcement, Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
+import { auth } from '@clerk/nextjs/server';
+
+const { sessionClaims } = await auth();
+const role = (sessionClaims?.metadata as { role: string })?.role;
 
 const columns = [
   {
@@ -22,10 +25,10 @@ const columns = [
     accessor: 'date',
     className: 'hidden md:table-cell',
   },
-  {
+  role === 'admin' ? {
     header: 'Actions',
     accessor: 'action',
-  },
+  } : null,
 ];
 
 export type AnnouncementItem = Announcement & {
