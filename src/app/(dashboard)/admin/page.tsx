@@ -12,10 +12,10 @@ const AdminPage = async () => {
       <div className="flex flex-col gap-8 w-full lg:w-2/3">
         {/* UserCards */}
         <div className="flex gap-4 justify-between flex-wrap">
-          <UserCard schoolRole="student" />
-          <UserCard schoolRole="teacher" />
-          <UserCard schoolRole="parent" />
-          <UserCard schoolRole="staff" />
+          <UserCard roleType="admin" />
+          <UserCard roleType="student" />
+          <UserCard roleType="teacher" />
+          <UserCard roleType="parent" />
         </div>
         {/* Middle charts */}
         <div className="flex flex-col lg:flex-row gap-4">
