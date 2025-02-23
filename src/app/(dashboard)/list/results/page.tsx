@@ -7,6 +7,7 @@ import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { currentUserId, role } from '@/lib/utils';
+import FormModal from '@/components/FormModal';
 
 const columns = [
   {
@@ -184,8 +185,8 @@ const ResultListPage = async ({ searchParams
             <Link href={'/list/teachers/${teacher.id}'}>
               <button className="flex items-center justify-center rounded-full bg-CSky w-7 h-7">
                 <Image
-                  src={'/images/edit.png'}
-                  alt="Edit"
+                  src={'/images/view.png'}
+                  alt="View"
                   width={16}
                   height={16}
                 />
@@ -227,17 +228,12 @@ const ResultListPage = async ({ searchParams
                   src="/images/sort.png"
                   width={14}
                   height={14}
-                  alt="filter"
+                  alt="sort"
                 />
               </button>
-              <button className="grid place-items-center w-8 h-8 bg-CYellow rounded-full">
-                <Image
-                  src="/images/plus.png"
-                  width={14}
-                  height={14}
-                  alt="filter"
-                />
-              </button>
+              {role === 'admin' || role === 'teacher' ? (
+                <FormModal table="result" type="create" />
+              ) : null}
             </div>
           </div>
         </div>
