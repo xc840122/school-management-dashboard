@@ -2,11 +2,11 @@ import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
-import { role } from '../../../../../public/data/data';
 import FormModal from '@/components/FormModal';
 import type { Parent, Prisma, Student } from '@prisma/client';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { prisma } from '@/lib/prisma';
+import { role } from '@/lib/utils';
 
 const columns = [
   {
@@ -28,10 +28,10 @@ const columns = [
     accessor: 'address',
     className: 'hidden lg:table-cell',
   },
-  {
+  role === 'admin' ? {
     header: 'Actions',
     accessor: 'action',
-  },
+  } : null,
 ];
 export type ParentItem = Parent & { students: Student[] };
 

@@ -3,10 +3,10 @@ import Table from '@/components/Table';
 import TableSearchBar from '@/components/TableSearchBar';
 import Image from 'next/image';
 import Link from 'next/link';
-import { role } from '../../../../../public/data/data';
 import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
+import { currentUserId, role } from '@/lib/utils';
 
 const columns = [
   {
@@ -37,10 +37,10 @@ const columns = [
     accessor: 'date',
     className: 'hidden md:table-cell',
   },
-  {
+  role === 'admin' || role === 'teacher' ? {
     header: 'Actions',
     accessor: 'action',
-  },
+  } : null,
 ];
 
 export type ResultItem = {
@@ -87,6 +87,24 @@ const ResultListPage = async ({ searchParams
             break;
         }
       }
+    }
+
+    // Role condition
+    switch (role) {
+      case "admin":
+        break;
+      case "teacher":
+        query.OR = [
+          { exam: { lesson: { teacherId: currentUserId ?? '' } } },
+          { assignment: { lesson: { teacherId: currentUserId ?? '' } } },
+        ]
+        break;
+      case "student":
+        query.studentId = currentUserId ?? '';
+        break;
+      case "parent":
+        query.student = { parentId: currentUserId ?? '' };
+        break;
     }
 
     // Get data and count
@@ -173,7 +191,7 @@ const ResultListPage = async ({ searchParams
                 />
               </button>
             </Link>
-            {role === 'admin' ? (
+            {role === 'admin' || role === 'teacher' ? (
               <button className="flex items-center justify-center rounded-full bg-CPurple w-7 h-7">
                 <Image
                   src={'/images/delete.png'}
