@@ -6,7 +6,7 @@ import FormModal from '@/components/FormModal';
 import { Lesson, Prisma } from '@prisma/client';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { prisma } from '@/lib/prisma';
-import { currentUserId, role } from '@/lib/utils';
+import { role } from '@/lib/utils';
 
 const columns = [
   {
@@ -72,25 +72,25 @@ const LessonListPage = async ({ searchParams
     }
 
     // Role condition
-    switch (role) {
-      case 'admin':
-        break;
-      case 'teacher':
-        query.teacherId = currentUserId ?? '';
-        break;
-      // case 'student':
-      //   query.class = {
-      //     students: { some: { id: currentUserId ?? '' } }
-      //   };
-      //   break;
-      // case 'parent':
-      //   query.class = {
-      //     students: { some: { parentId: currentUserId ?? '' } }
-      //   };
-      //   break;
-      default:
-        break;
-    }
+    // switch (role) {
+    //   case 'admin':
+    //     break;
+    //   case 'teacher':
+    //     query.teacherId = currentUserId ?? '';
+    //     break;
+    // case 'student':
+    //   query.class = {
+    //     students: { some: { id: currentUserId ?? '' } }
+    //   };
+    //   break;
+    // case 'parent':
+    //   query.class = {
+    //     students: { some: { parentId: currentUserId ?? '' } }
+    //   };
+    //   break;
+    //   default:
+    //     break;
+    // }
 
     // fetch data and count from database
     const [data, count] = await prisma.$transaction([

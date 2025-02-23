@@ -1,6 +1,6 @@
 import Annoucements from '@/components/Annoucements';
 import AttendanceChart from '@/components/AttendanceChart';
-import CountChart from '@/components/CountChart';
+import CountChartContainer from '@/components/CountChartContainer';
 import EventCalendar from '@/components/EventCalendar';
 import FinanceChart from '@/components/FinanceChart';
 import UserCard from '@/components/UserCard';
@@ -12,16 +12,16 @@ const AdminPage = async () => {
       <div className="flex flex-col gap-8 w-full lg:w-2/3">
         {/* UserCards */}
         <div className="flex gap-4 justify-between flex-wrap">
-          <UserCard schoolRole="student" />
-          <UserCard schoolRole="teacher" />
-          <UserCard schoolRole="parent" />
-          <UserCard schoolRole="staff" />
+          <UserCard roleType="admin" />
+          <UserCard roleType="student" />
+          <UserCard roleType="teacher" />
+          <UserCard roleType="parent" />
         </div>
         {/* Middle charts */}
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Count chart */}
           <div className="w-full lg:w-1/3 h-[450px] rounded-2xl">
-            <CountChart />
+            <CountChartContainer />
           </div>
           {/* Attendence chart */}
           <div className="w-full lg:w-2/3 h-[450px] rounded-2xl">
